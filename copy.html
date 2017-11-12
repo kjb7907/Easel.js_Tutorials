@@ -4,13 +4,8 @@
     <meta charset="utf-8">
     <title>EaselJS: Simple SpriteSheet Example</title>
 
-    <link href="./_assets/css/shared.css" rel="stylesheet" type="text/css"/>
-    <link href="./_assets/css/examples.css" rel="stylesheet" type="text/css"/>
     <script src="./_assets/js/examples.js"></script>
-
     <script src="./lib/easeljs-NEXT.js"></script>
-    <!-- We also provide hosted minified versions of all CreateJS libraries.
-      http://code.createjs.com -->
     <script src="./_assets/libs/preloadjs-NEXT.min.js"></script>
 
     <script id="editable">
@@ -20,6 +15,8 @@
         function init() {
             examples.showDistractor();
             stage = new createjs.Stage(document.getElementById("testCanvas"));
+            stage.canvas.width = window.innerWidth;
+            stage.canvas.height = window.innerHeight;
 
             // grab canvas width and height for later calculations:
             w = stage.canvas.width;
@@ -41,16 +38,19 @@
         function handleComplete() {
             examples.hideDistractor();
 
+            // 배경
             sky = new createjs.Shape();
             sky.graphics.beginBitmapFill(loader.getResult("sky")).drawRect(0, 0, w, h);
             //By default swapping between Stage for StageGL will not allow for vector drawing operation such as BitmapFill, useless you cache your shape.
             sky.cache(0, 0, w, h);
 
+            // 하단 바닥
             var groundImg = loader.getResult("ground");
             ground = new createjs.Shape();
             ground.graphics.beginBitmapFill(groundImg).drawRect(0, 0, w + groundImg.width, groundImg.height);
             ground.tileW = groundImg.width;
             ground.y = h - groundImg.height;
+
             //By default swapping between Stage for StageGL will not allow for vector drawing operation such as BitmapFill, useless you cache your shape.
             ground.cache(0, 0, w + groundImg.width, groundImg.height);
 
@@ -73,7 +73,8 @@
             });
             grant = new createjs.Sprite(spriteSheet, "run");
             grant.x = stage.canvas.width / 2;
-            grant.y = 35;
+            grant.y = stage.canvas.height/1.9
+            ;
 
             stage.addChild(sky, hill, hill2, ground, grant);
             stage.addEventListener("stagemousedown", handleJumpStart);
@@ -109,16 +110,18 @@
 </head>
 
 <body onload="init();">
-
-<header class="EaselJS">
-    <h1>Simple SpriteSheet Example</h1>
-
-    <p>A simple example of defining a <code>SpriteSheet</code> and playing it
-        back using <code>Sprite</code>.</p>
-</header>
-
 <div>
-    <canvas id="testCanvas" width="960" height="400"></canvas>
+    <canvas id="testCanvas" width="1366" height="768"></canvas>
 </div>
 </body>
 </html>
+
+<style>
+    html, body { height:100%; overflow:hidden }
+    body {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: 100% 100%;
+    }
+</style>

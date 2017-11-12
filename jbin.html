@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>EaselJS: Simple SpriteSheet Example</title>
+
+    <script src="./_assets/js/examples.js"></script>
+    <script src="./lib/easeljs-NEXT.js"></script>
+    <script src="./_assets/libs/preloadjs-NEXT.min.js"></script>
+    <script src="./jbin.js"></script>
+
+</head>
+
+<body onload="init();" onresize="resized();">
+<div>
+    <canvas id="testCanvas" width="1366" height="768"></canvas>
+</div>
+</body>
+</html>
+
+<style>
+    html, body { height:100%; overflow:hidden }
+    body {
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: 100% 100%;
+    }
+</style>
